@@ -16,7 +16,7 @@ export default function Contact() {
       >
         <h1 className="text-3xl font-bold mb-6 text-center">Contact Me</h1>
         <p className="text-lg mb-6 text-center">
-          I'm always open to new opportunities and collaborations. Feel free to reach out!
+          I&apos;m always open to new opportunities and collaborations. Feel free to reach out!
         </p>
         <div className="space-y-4">
           <div className="flex items-center">
