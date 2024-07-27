@@ -22,7 +22,7 @@ jobs:
         run: |
           mkdir -p content
           rm -rf content/posts
-          mv blog_contents/posts content/
+          mv blog-contents/posts content/
           rm -rf blog-contents
 
       - name: Commit changes
