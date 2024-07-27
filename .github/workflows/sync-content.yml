@@ -16,13 +16,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: sambaths/blog-contents
-          path: temp-blog-content
+          path: blog-contents
 
       - name: Sync blog content
         run: |
           mkdir -p content
           rm -rf content/posts
-          mv blog-contents/posts content/
+          mv blog_contents/posts content/
           rm -rf blog-contents
 
       - name: Commit changes
