@@ -36,3 +36,37 @@
 <meta name="twitter:image" content="{% if page.image %}{{ site.url }}{{ page.image }}{% else %}{{ site.url }}/assets/images/default-twitter-image.jpg{% endif %}">
 <meta name="twitter:site" content="@your_twitter_handle">
 <meta name="twitter:creator" content="@your_twitter_handle">
+
+<meta name="description" content="{{ page.description | default: site.description }}">
+<meta name="keywords" content="{{ page.keywords | default: site.keywords }}">
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{ page.title }}",
+    "description": "{{ page.description }}",
+    "keywords": "{{ page.keywords }}",
+    "url": "{{ page.url | absolute_url }}",
+    "datePublished": "{{ page.date }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author }}"
+    }
+  }
+  </script>
+
+  {% seo %}
+
+  <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GP0MYQ4BX0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GP0MYQ4BX0');
+</script>

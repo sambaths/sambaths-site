@@ -2,15 +2,13 @@
 permalink: /non-menu-page/
 title: "Page not in menu"
 author_profile: true
+sitemap: false
 redirect_from: 
   - "/nmp/"
   - "/nmp.html"
 ---
 
-This is a page not in the menu. You can use markdown in this page.
+Oops! This page is no longer available.
 
-Heading 1
-======
+[Go back to Home](/)
 
-Heading 2
-======

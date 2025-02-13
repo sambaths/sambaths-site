@@ -16,7 +16,7 @@ description              : &description "I help businesses eliminate inefficienc
 url                      : https://sambaths.com # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "sambaths/sambaths-site"
-
+keywords                 : "Data Science, Analytics, Consulting, Pricing Strategy, Machine Learning, LLM, GenAI, AI, Python, Python3, R, Databricks, Cloud, AWS, Azure, GCP Google Cloud, Tutorials, Python Tutorials, Data Scientist"
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html
@@ -86,7 +86,7 @@ author:
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
-breadcrumbs              : false # true, false (default)
+breadcrumbs              : true # true, false (default)
 words_per_minute         : 160
 future                   : true
 read_more                : "disabled" # if enabled, adds "Read more" links to excerpts
@@ -217,16 +217,16 @@ kramdown:
 # These settings control the types of collections used by the template
 collections:
   teaching:
-    output: true
+    output: false
     permalink: /:collection/:path/
   publications:
     output: false
     permalink: /:collection/:path/
   portfolio:
-    output: true
+    output: false
     permalink: /:collection/:path/
   talks:
-    output: true
+    output: false
     permalink: /:collection/:path/
   posts:
     output: true
@@ -253,6 +253,7 @@ defaults:
     values:
       layout: single
       author_profile: true
+      sitemap: true
   # _teaching
   - scope:
       path: ""
@@ -262,6 +263,7 @@ defaults:
       author_profile: true
       share: true
       comments: true
+      sitemap: false
   # _publications
   - scope:
       path: ""
@@ -271,6 +273,7 @@ defaults:
       author_profile: true
       share: true
       comments: true
+      sitemap: false
   # _portfolio
   - scope:
       path: ""
@@ -280,6 +283,7 @@ defaults:
       author_profile: true
       share: true
       comment: true
+      sitemap: false
   # _talks
   - scope:
       path: ""
@@ -288,6 +292,7 @@ defaults:
       layout: talk
       author_profile: true
       share: true
+      sitemap: false
 
 
 # Sass/SCSS
@@ -311,6 +316,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
+  - jekyll-seo-tag
 
 # Mimic GitHub Pages with --safe
 whitelist:
@@ -320,7 +326,6 @@ whitelist:
   - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
-
 
 # Archives
 #  Type
