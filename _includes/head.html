@@ -51,9 +51,14 @@
     "datePublished": "{{ page.date }}",
     "author": {
       "@type": "Person",
-      "name": "{{ site.author }}"
+      "name": "{{ site.author.name | escape }}",
+      "url": "{{ site.url }}",
+      "sameAs": [
+        {% if site.author.github %} "{{ site.author.github | prepend: 'https://github.com/' }}",{% endif %}
+        {% if site.author.linkedin %} "{{ site.author.linkedin | prepend: 'https://www.linkedin.com/in/' }}"{% endif %}
+      ]
     }
-  }
+    }
   </script>
 
   {% seo %}
