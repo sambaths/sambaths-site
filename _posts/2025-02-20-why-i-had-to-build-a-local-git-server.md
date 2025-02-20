@@ -1,6 +1,6 @@
 ---
 title: Why I had to build a Local Git Server (And How You Can Too in 5 Minutes)
-date: 2025-02-19
+date: 2025-02-20
 permalink: /posts/2025/02/why-i-had-to-build-a-local-git-server/
 image: "/images/git_init_bare.webp"
 author_profile: true
