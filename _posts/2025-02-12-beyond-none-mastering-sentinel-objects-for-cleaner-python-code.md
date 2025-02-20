@@ -2,16 +2,17 @@
 title: "Beyond None: Mastering Sentinel Objects for Cleaner Python Code"
 date: 2025-02-12
 permalink: /posts/2025/02/beyond-none-mastering-sentinel-objects-for-cleaner-python-code/
-image: "/images/Sentinels in Python.png"
+image: "/images/sentinels_in_python.webp"
 author_profile: true
 author: Sambath S
-keywords: python, advanced python, tutorial, programming, programming tip, python3, machine learning, ai
+keywords: python, advanced python, tutorial, programming, programming tip, python3, machine learning, ai, sentinel objects, sentinel, database, fastapi
 tags:
   - python
   - advanced
   - programming
   - tutorial
   - tip
+  - database
 ---
 
 If you’ve ever used `None` to represent "missing" or "default" values in Python, you’ve likely run into a subtle problem: what if `None` is a valid input for your function or data structure? For example, a caching function might need to distinguish between a cached `None` value and the absence of a cached value altogether. Using `None` for both cases creates ambiguity and bugs that are hard to trace.
