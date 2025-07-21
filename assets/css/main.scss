@@ -44,15 +44,16 @@
 ;
 
 .theme-switcher {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-right: 20px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
-.theme-switcher a {
-  padding: 10px;
-  border: 1px solid;
-  border-radius: 5px;
-  text-decoration: none;
+.theme-toggle {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
 }

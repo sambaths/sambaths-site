@@ -74,7 +74,7 @@ $(document).ready(function(){
 
   // Theme switching
   var themes = ["default", "dark", "contrast"];
-  var currentTheme = localStorage.getItem('theme');
+  var currentTheme = localStorage.getItem('theme') || "default";
 
   function setTheme(theme) {
     if (themes.indexOf(theme) > -1) {
