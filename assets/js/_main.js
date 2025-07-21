@@ -72,4 +72,25 @@ $(document).ready(function(){
     midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
   });
 
+  // Theme switching
+  var themes = {{ site.site_theme | jsonify }};
+  var currentTheme = localStorage.getItem('theme');
+
+  function setTheme(theme) {
+    if (themes.indexOf(theme) > -1) {
+      $('body').removeClass(themes.join(' ')).addClass(theme);
+      localStorage.setItem('theme', theme);
+      currentTheme = theme;
+    }
+  }
+
+  if (currentTheme) {
+    setTheme(currentTheme);
+  }
+
+  $('.theme-switcher a').on('click', function(e) {
+    e.preventDefault();
+    var theme = $(this).data('theme');
+    setTheme(theme);
+  });
 });
