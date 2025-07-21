@@ -88,9 +88,11 @@ $(document).ready(function(){
     setTheme(currentTheme);
   }
 
-  $('.theme-switcher a').on('click', function(e) {
+  $('.theme-toggle').on('click', function(e) {
     e.preventDefault();
-    var theme = $(this).data('theme');
-    setTheme(theme);
+    var currentThemeIndex = themes.indexOf(currentTheme);
+    var nextThemeIndex = (currentThemeIndex + 1) % themes.length;
+    var nextTheme = themes[nextThemeIndex];
+    setTheme(nextTheme);
   });
 });

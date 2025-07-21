@@ -42,3 +42,17 @@
     "vendor/font-awesome/brands",
     "vendor/magnific-popup/magnific-popup"
 ;
+
+.theme-switcher {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.theme-switcher a {
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  text-decoration: none;
+}
