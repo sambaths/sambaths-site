@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Toggle Button</title>
+  <style>
+    /* ======================================================================= */
+    /* THEME TOGGLE BUTTON STYLES - PASTE THIS INTO YOUR WEBSITE'S CSS        */
+    /* ======================================================================= */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      background-color: #f0f0f0;
+      border-radius: 9999px;
+      padding: 5px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .theme-icon {
+      font-size: 1.5rem;
+      padding: 5px;
+      border-radius: 50%;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .theme-icon.active {
+      background-color: #ffffff;
+      transform: scale(1.1);
+    }
+
+    /* Demo styles for the body */
+    .light-mode {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .dark-mode {
+      background-color: #1a1a1a;
+      color: #ffffff;
+    }
+
+    .high-contrast-mode {
+      background-color: #000000;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <!-- ======================================================================= -->
+  <!-- THEME TOGGLE BUTTON - PASTE THIS INTO YOUR WEBSITE'S HTML BODY          -->
+  <!-- ======================================================================= -->
+  <div id="theme-toggle" class="theme-toggle" role="button" aria-label="Switch to dark mode" tabindex="0">
+    <div class="theme-icon" data-theme="light">🌞</div>
+    <div class="theme-icon" data-theme="dark">🌙</div>
+    <div class="theme-icon" data-theme="high-contrast">✨</div>
+  </div>
+  <script>
+    /* ======================================================================= */
+    /* THEME TOGGLE BUTTON SCRIPT - PASTE THIS INTO YOUR WEBSITE'S SCRIPT TAGS */
+    /* ======================================================================= */
+    document.addEventListener('DOMContentLoaded', function () {
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcons = document.querySelectorAll('.theme-icon');
+      const body = document.body;
+
+      const themes = ['light', 'dark', 'high-contrast'];
+      let currentThemeIndex = 0;
+
+      function setTheme(theme) {
+        // Remove all theme classes from the body
+        themes.forEach(t => body.classList.remove(t + '-mode'));
+        // Add the new theme class to the body
+        body.classList.add(theme + '-mode');
+
+        // Update the active icon
+        themeIcons.forEach(icon => {
+          if (icon.dataset.theme === theme) {
+            icon.classList.add('active');
+          } else {
+            icon.classList.remove('active');
+          }
+        });
+
+        // Update the ARIA label
+        const nextThemeIndex = (themes.indexOf(theme) + 1) % themes.length;
+        const nextTheme = themes[nextThemeIndex];
+        themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+      }
+
+      // Set the initial theme
+      setTheme(themes[currentThemeIndex]);
+
+      themeToggle.addEventListener('click', () => {
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        const newTheme = themes[currentThemeIndex];
+        setTheme(newTheme);
+      });
+
+      themeToggle.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          themeToggle.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
