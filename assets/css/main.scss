@@ -45,23 +45,37 @@
 
 .theme-switcher {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 9999px;
+  padding: 4px;
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 10px;
 }
 
-.theme-toggle {
+.theme-switcher input[type="radio"] {
+  display: none;
+}
+
+.theme-switcher label {
   cursor: pointer;
-  margin-left: 10px;
-  transition: all 0.3s ease-in-out;
+  padding: 4px;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.theme-toggle:hover {
-  transform: scale(1.1);
+.theme-switcher input[type="radio"]:checked + label {
+  background-color: #f0f0f0;
 }
 
-.theme-toggle.active {
-  color: #007bff; /* Or any other color to indicate the active theme */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

@@ -86,21 +86,18 @@ $(document).ready(function(){
       localStorage.setItem('theme', theme);
       // Update the current theme variable
       currentTheme = theme;
-      // Remove the active class from all theme toggles
-      $('.theme-toggle').removeClass('active');
-      // Add the active class to the current theme toggle
-      $('.theme-toggle[data-theme="' + theme + '"]').addClass('active');
+      // Check the appropriate radio button
+      $('#theme-switch-' + theme).prop('checked', true);
     }
   }
 
   // Set the initial theme
   setTheme(currentTheme);
 
-  // Add a click event listener to the theme toggles
-  $('.theme-toggle').on('click', function(e) {
-    e.preventDefault();
-    // Get the theme from the data-theme attribute
-    var theme = $(this).data('theme');
+  // Add a change event listener to the theme switcher
+  $('.theme-switcher').on('change', 'input[name="theme-switch"]', function() {
+    // Get the theme from the value of the selected radio button
+    var theme = $(this).val();
     // Set the new theme
     setTheme(theme);
   });
