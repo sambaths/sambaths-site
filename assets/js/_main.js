@@ -72,33 +72,4 @@ $(document).ready(function(){
     midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
   });
 
-  // Theme switching
-  var themes = ["default", "dark", "contrast"];
-  var currentTheme = localStorage.getItem('theme') || "default";
-
-  function setTheme(theme) {
-    if (themes.indexOf(theme) > -1) {
-      // Remove all theme classes from the body
-      $('body').removeClass(themes.join(' '));
-      // Add the new theme class to the body
-      $('body').addClass(theme);
-      // Save the new theme to local storage
-      localStorage.setItem('theme', theme);
-      // Update the current theme variable
-      currentTheme = theme;
-      // Check the appropriate radio button
-      $('#theme-switch-' + theme).prop('checked', true);
-    }
-  }
-
-  // Set the initial theme
-  setTheme(currentTheme);
-
-  // Add a change event listener to the theme switcher
-  $('.theme-switcher').on('change', 'input[name="theme-switch"]', function() {
-    // Get the theme from the value of the selected radio button
-    var theme = $(this).val();
-    // Set the new theme
-    setTheme(theme);
-  });
 });

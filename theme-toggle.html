@@ -3,110 +3,111 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Theme Toggle Button</title>
+  <title>Theme Toggle</title>
   <style>
-    /* ======================================================================= */
-    /* THEME TOGGLE BUTTON STYLES - PASTE THIS INTO YOUR WEBSITE'S CSS        */
-    /* ======================================================================= */
-    .theme-toggle {
+    .theme-toggle-container {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      top: 1rem;
+      right: 1rem;
+      z-index: 9999;
+    }
+
+    .theme-toggle-button {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      background-color: #f0f0f0;
-      border-radius: 9999px;
-      padding: 5px;
-      cursor: pointer;
-      z-index: 1000;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .theme-toggle-button:hover {
+      border-color: #bbb;
+    }
+
+    .theme-icon-wrapper {
+      position: relative;
+      width: 24px;
+      height: 24px;
     }
 
     .theme-icon {
-      font-size: 1.5rem;
-      padding: 5px;
-      border-radius: 50%;
-      transition: all 0.3s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s, transform 0.3s;
     }
 
-    .theme-icon.active {
-      background-color: #ffffff;
-      transform: scale(1.1);
+    .light-mode .theme-icon-light,
+    .dark-mode .theme-icon-dark,
+    .high-contrast-mode .theme-icon-contrast {
+      opacity: 1;
+      transform: scale(1);
     }
 
-    /* Demo styles for the body */
-    .light-mode {
-      background-color: #ffffff;
-      color: #000000;
+    .dark-mode .theme-toggle-button {
+      background-color: #222;
+      border-color: #444;
     }
 
-    .dark-mode {
-      background-color: #1a1a1a;
-      color: #ffffff;
-    }
-
-    .high-contrast-mode {
-      background-color: #000000;
-      color: #ffffff;
+    .high-contrast-mode .theme-toggle-button {
+      background-color: #000;
+      border-color: #fff;
+      color: #fff;
     }
   </style>
 </head>
-<body>
-  <!-- ======================================================================= -->
-  <!-- THEME TOGGLE BUTTON - PASTE THIS INTO YOUR WEBSITE'S HTML BODY          -->
-  <!-- ======================================================================= -->
-  <div id="theme-toggle" class="theme-toggle" role="button" aria-label="Switch to dark mode" tabindex="0">
-    <div class="theme-icon" data-theme="light">🌞</div>
-    <div class="theme-icon" data-theme="dark">🌙</div>
-    <div class="theme-icon" data-theme="high-contrast">✨</div>
+<body class="light-mode">
+  <!-- Integration instructions: -->
+  <!-- 1. Paste the following HTML into your site's <body> -->
+  <!-- 2. Paste the <style> block into your site's <head> or CSS file -->
+  <!-- 3. Paste the <script> block at the end of your site's <body> -->
+
+  <div class="theme-toggle-container">
+    <button id="theme-toggle-button" class="theme-toggle-button" aria-label="Switch to dark theme" aria-live="polite">
+      <span class="theme-icon-wrapper">
+        <svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="theme-icon theme-icon-contrast" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.32 0L12 2.69z"></path></svg>
+      </span>
+    </button>
   </div>
+
   <script>
-    /* ======================================================================= */
-    /* THEME TOGGLE BUTTON SCRIPT - PASTE THIS INTO YOUR WEBSITE'S SCRIPT TAGS */
-    /* ======================================================================= */
-    document.addEventListener('DOMContentLoaded', function () {
-      const themeToggle = document.getElementById('theme-toggle');
-      const themeIcons = document.querySelectorAll('.theme-icon');
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleButton = document.getElementById('theme-toggle-button');
       const body = document.body;
 
       const themes = ['light', 'dark', 'high-contrast'];
-      let currentThemeIndex = 0;
+      let currentTheme = localStorage.getItem('theme') || 'light';
 
-      function setTheme(theme) {
-        // Remove all theme classes from the body
-        themes.forEach(t => body.classList.remove(t + '-mode'));
-        // Add the new theme class to the body
-        body.classList.add(theme + '-mode');
+      const setTheme = (theme) => {
+        body.className = `${theme}-mode`;
+        localStorage.setItem('theme', theme);
 
-        // Update the active icon
-        themeIcons.forEach(icon => {
-          if (icon.dataset.theme === theme) {
-            icon.classList.add('active');
-          } else {
-            icon.classList.remove('active');
-          }
-        });
-
-        // Update the ARIA label
         const nextThemeIndex = (themes.indexOf(theme) + 1) % themes.length;
         const nextTheme = themes[nextThemeIndex];
-        themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
-      }
+        themeToggleButton.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
+      };
 
-      // Set the initial theme
-      setTheme(themes[currentThemeIndex]);
-
-      themeToggle.addEventListener('click', () => {
-        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-        const newTheme = themes[currentThemeIndex];
-        setTheme(newTheme);
+      themeToggleButton.addEventListener('click', () => {
+        const currentThemeIndex = themes.indexOf(currentTheme);
+        const nextThemeIndex = (currentThemeIndex + 1) % themes.length;
+        currentTheme = themes[nextThemeIndex];
+        setTheme(currentTheme);
       });
 
-      themeToggle.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          themeToggle.click();
-        }
-      });
+      // Set initial theme
+      setTheme(currentTheme);
     });
   </script>
 </body>
