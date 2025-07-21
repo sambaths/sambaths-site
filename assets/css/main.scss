@@ -44,6 +44,9 @@
 ;
 
 .theme-switcher {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   position: absolute;
   right: 20px;
   top: 20px;
@@ -51,9 +54,14 @@
 
 .theme-toggle {
   cursor: pointer;
+  margin-left: 10px;
   transition: all 0.3s ease-in-out;
 }
 
 .theme-toggle:hover {
   transform: scale(1.1);
+}
+
+.theme-toggle.active {
+  color: #007bff; /* Or any other color to indicate the active theme */
 }

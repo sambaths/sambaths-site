@@ -78,21 +78,30 @@ $(document).ready(function(){
 
   function setTheme(theme) {
     if (themes.indexOf(theme) > -1) {
-      $('body').removeClass(themes.join(' ')).addClass(theme);
+      // Remove all theme classes from the body
+      $('body').removeClass(themes.join(' '));
+      // Add the new theme class to the body
+      $('body').addClass(theme);
+      // Save the new theme to local storage
       localStorage.setItem('theme', theme);
+      // Update the current theme variable
       currentTheme = theme;
+      // Remove the active class from all theme toggles
+      $('.theme-toggle').removeClass('active');
+      // Add the active class to the current theme toggle
+      $('.theme-toggle[data-theme="' + theme + '"]').addClass('active');
     }
   }
 
-  if (currentTheme) {
-    setTheme(currentTheme);
-  }
+  // Set the initial theme
+  setTheme(currentTheme);
 
+  // Add a click event listener to the theme toggles
   $('.theme-toggle').on('click', function(e) {
     e.preventDefault();
-    var currentThemeIndex = themes.indexOf(currentTheme);
-    var nextThemeIndex = (currentThemeIndex + 1) % themes.length;
-    var nextTheme = themes[nextThemeIndex];
-    setTheme(nextTheme);
+    // Get the theme from the data-theme attribute
+    var theme = $(this).data('theme');
+    // Set the new theme
+    setTheme(theme);
   });
 });
