@@ -73,7 +73,7 @@ $(document).ready(function(){
   });
 
   // Theme switching
-  var themes = {{ site.site_theme | jsonify }};
+  var themes = ["default", "dark", "contrast"];
   var currentTheme = localStorage.getItem('theme');
 
   function setTheme(theme) {
