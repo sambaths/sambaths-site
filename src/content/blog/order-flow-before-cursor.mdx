@@ -77,38 +77,3 @@ The bottleneck shifts from "can I build this" to "do I know what this means." An
 
 *Turns out I'm better at parsing tick data than predicting the next tick. So I built the parser.*
 
-<!--
-== PROMOTION DERIVATIVES ==
-
---- X THREAD (7 posts) ---
-
-1/ Got obsessed with order flow trading for the Indian market. Fyers offers exactly the data you need — if you're willing to wrestle with it.
-
-2/ Their real-time feed: WebSocket + Protobuf, 50-level depth, 1000+ ticks/sec, sub-10ms latency. F&O only. Fyers API docs are decent but the format takes some figuring out.
-
-3/ AI coding tools (Cursor, Claude) existed when I built this. I just didn't lean on them enough. Regret that.
-
-4/ The feedback loop: spot a weird delta spike → form hypothesis → hack a fix → rerun pipeline → wait for plots → check. 30 minutes per cycle. Cursor would have cut that to two.
-
-5/ What I built: connect to WebSocket, decode protobuf, compute order flow metrics, plot. Nothing fancy. But taught me more about Indian market microstructure than any YouTube video.
-
-6/ Today? opencode/Cursor handle the plumbing. Describe the pipeline in plain English → prototype in an hour. The bottleneck shifts from "can I build this" to "do I know what this means."
-
-7/ Faster builds don't mean faster understanding. The AI writes the parser but can't tell you if that divergence matters. That's fine — it's where you should spend your time anyway.
-
---- LINKEDIN POST ---
-
-I spent way too long building an order flow engine for Indian market F&O data. The frustrating part? AI coding tools existed — I just didn't use them enough.
-
-Fyers offers a real-time WebSocket feed with Protobuf, 50-level depth, and sub-10ms latency. The data is incredible. But parsing it, debugging edge cases, and iterating on analysis took forever because I was doing it the hard way.
-
-Today, tools like opencode and Cursor handle the plumbing. You describe the pipeline, get a prototype in an hour, and spend your time on what the data actually means.
-
-That's the real bottleneck anyway.
-
-#OrderFlow #IndianMarkets #DataScience #ai
-
---- HN/REDDIT SUMMARY ---
-
-Built an order flow analytics pipeline using Fyers' real-time market data feed for Indian F&O instruments. The feed uses WebSocket + Protobuf with 50-level depth. The project itself is straightforward — connect, decode, compute delta/cumulative delta, plot. The retrospective angle is that AI coding tools (Cursor, opencode) existed at the time but I didn't lean on them, which made iteration cycles painfully slow. The real insight: faster tooling shifts the bottleneck from implementation to domain understanding, which is where time should be spent anyway.
--->
