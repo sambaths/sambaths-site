@@ -10,10 +10,10 @@
     "sync-issues": "node scripts/sync-issues.mjs"
   },
   "dependencies": {
-    "astro": "^5.0.0",
-    "@astrojs/netlify": "^6.0.0",
     "@astrojs/mdx": "^4.0.0",
     "@astrojs/rss": "^4.0.0",
-    "@astrojs/sitemap": "^3.0.0"
+    "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/vercel": "^10.0.8",
+    "astro": "^5.0.0"
   }
 }
