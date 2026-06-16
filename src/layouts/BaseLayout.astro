@@ -3,6 +3,7 @@ import '../styles/global.css';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import SEO from '../components/SEO.astro';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 export interface Props {
   title: string;
@@ -51,6 +52,7 @@ const currentPath = Astro.url.pathname;
     </main>
 
     <Analytics />
+    <SpeedInsights />
 
     <footer class="footer">
       <div class="container footer__inner">
