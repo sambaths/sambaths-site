@@ -1,0 +1,114 @@
+---
+title: "My Order Flow Project Took Forever — I'd Use opencode Now"
+date: 2026-06-16
+image: "/images/og-default.png"
+description: "Building an order flow engine for the Indian market with Fyers tick data was a grind. Now Cursor and opencode do the heavy lifting. Here's what I learned."
+tags:
+  - trading
+  - data-science
+  - python
+  - ai-tools
+  - programming
+type: "technical"
+---
+
+*Disclaimer: I'm still learning this stuff. Some details below might be wrong. Corrections welcome — I'll update the post.*
+
+A while back, I got obsessed with order flow trading.
+
+The idea is simple: instead of watching price candles, watch the individual trades that make them up. Every market is just a stream of people buying and selling — if you can parse that stream, you can see things candles hide. Delta, cumulative delta, imbalances. The microstructure.
+
+I wanted this for the Indian market. Turns out Fyers offers exactly the data you need — if you're willing to wrestle with it.
+
+## The Fyers Real-Time Feed
+
+Fyers provides a real-time market data feed via WebSocket, encoded in Protobuf. It's not just trades — it's full 50-level depth, quotes, OI, volume, and a continuous stream of updates. Up to 1000+ ticks per second during active hours, with sub-10ms latency from the exchange.
+
+The feed sends an initial snapshot when you subscribe, then differential updates after that. 
+
+One important caveat: this feed is available for **F&O instruments only** i guess.
+
+Getting access was straightforward. Sign up, get your api key, connect via WebSocket.
+
+Parsing the stream was the actual work.
+
+## Building the Order Flow Engine
+
+AI coding tools existed when I built this — Cursor was around, Claude was around. I just didn't lean on them enough. In hindsight, I should have. A lot of the grinding I did could have been a conversation.
+
+The feedback loop was the painful part:
+
+- Did I miscompute delta because of a timestamp issue, or because I'm reading the trade direction wrong?
+- Why does cumulative delta spike here — real buying pressure, or a data artifact?
+- Is this a feed gap, or a real flat period?
+
+I'd stare at a plot, form a hypothesis, hack up a fix, rerun the pipeline, wait for regeneration, check again. One cycle could take 30 minutes. Cursor would have cut that to two.
+
+## What I Actually Built
+
+An order flow pipeline for F&O symbols that:
+
+1. Connects to the Fyers WebSocket feed and subscribes to symbols
+2. Decodes Protobuf messages, extracts ticks and depth data
+3. Computes delta from buy/sell flags, aggregates into bars
+4. Spits out plots — cumulative delta, imbalances, the usual suspects
+
+Nothing fancy.
+
+## What Changed
+
+Now we have Cursor, Claude Code, opencode — all better than what was available when I started.
+
+If I redid this today, I'd describe the pipeline in plain English and have a working prototype in an hour. The tooling handles the plumbing: WebSocket reconnection, Protobuf decoding, edge case handling, basic visualization. I'd iterate on the analysis, not on debugging byte buffers.
+
+I've used opencode on other projects since. The gap is staggering. What took me a full day of debugging now takes one prompt and a few corrections.
+
+I wish I'd used Cursor more back then. But at least I know better now.
+
+## The Catch
+
+Faster builds don't mean faster understanding.
+
+You can generate a perfect order flow dashboard in 10 minutes. You'll still need weeks to understand what it's telling you. The AI can write the parser, but it can't tell you whether a delta divergence is meaningful in Nifty weekly options or just noise.
+
+The bottleneck shifts from "can I build this" to "do I know what this means." And that's actually fine. It means you spend your time where it matters.
+
+---
+
+*Turns out I'm better at parsing tick data than predicting the next tick. So I built the parser.*
+
+<!--
+== PROMOTION DERIVATIVES ==
+
+--- X THREAD (7 posts) ---
+
+1/ Got obsessed with order flow trading for the Indian market. Fyers offers exactly the data you need — if you're willing to wrestle with it.
+
+2/ Their real-time feed: WebSocket + Protobuf, 50-level depth, 1000+ ticks/sec, sub-10ms latency. F&O only. Fyers API docs are decent but the format takes some figuring out.
+
+3/ AI coding tools (Cursor, Claude) existed when I built this. I just didn't lean on them enough. Regret that.
+
+4/ The feedback loop: spot a weird delta spike → form hypothesis → hack a fix → rerun pipeline → wait for plots → check. 30 minutes per cycle. Cursor would have cut that to two.
+
+5/ What I built: connect to WebSocket, decode protobuf, compute order flow metrics, plot. Nothing fancy. But taught me more about Indian market microstructure than any YouTube video.
+
+6/ Today? opencode/Cursor handle the plumbing. Describe the pipeline in plain English → prototype in an hour. The bottleneck shifts from "can I build this" to "do I know what this means."
+
+7/ Faster builds don't mean faster understanding. The AI writes the parser but can't tell you if that divergence matters. That's fine — it's where you should spend your time anyway.
+
+--- LINKEDIN POST ---
+
+I spent way too long building an order flow engine for Indian market F&O data. The frustrating part? AI coding tools existed — I just didn't use them enough.
+
+Fyers offers a real-time WebSocket feed with Protobuf, 50-level depth, and sub-10ms latency. The data is incredible. But parsing it, debugging edge cases, and iterating on analysis took forever because I was doing it the hard way.
+
+Today, tools like opencode and Cursor handle the plumbing. You describe the pipeline, get a prototype in an hour, and spend your time on what the data actually means.
+
+That's the real bottleneck anyway.
+
+#OrderFlow #IndianMarkets #DataScience #ai
+
+--- HN/REDDIT SUMMARY ---
+
+Built an order flow analytics pipeline using Fyers' real-time market data feed for Indian F&O instruments. The feed uses WebSocket + Protobuf with 50-level depth. The project itself is straightforward — connect, decode, compute delta/cumulative delta, plot. The retrospective angle is that AI coding tools (Cursor, opencode) existed at the time but I didn't lean on them, which made iteration cycles painfully slow. The real insight: faster tooling shifts the bottleneck from implementation to domain understanding, which is where time should be spent anyway.
+-->
