@@ -1,6 +1,0 @@
-[build]
-command = "gem update --system 3.4.22 && bundle install && jekyll build"
-publish = "_site"
-
-[build.environment]
-RUBY_VERSION = "3.2.2"
