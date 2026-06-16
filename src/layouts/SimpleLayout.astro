@@ -1,0 +1,59 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  url?: string;
+}
+
+const { title, description, url } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} url={url}>
+  <article class="container simple-layout">
+    <h1 class="simple-layout__title">{title}</h1>
+    <div class="simple-layout__content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .simple-layout {
+    max-width: 40rem;
+  }
+
+  .simple-layout__title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .simple-layout__content {
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+
+  .simple-layout__content :global(p) {
+    margin-bottom: 1.25rem;
+  }
+
+  .simple-layout__content :global(h2) {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .simple-layout__content :global(h3) {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .simple-layout__content :global(ul) {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .simple-layout__content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+</style>

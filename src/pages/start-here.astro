@@ -1,0 +1,78 @@
+---
+import SimpleLayout from '../layouts/SimpleLayout.astro';
+---
+
+<SimpleLayout title="Start Here" description="Curated entry points for clients, employers, and peers. Find the best content for your interests." url="/start-here">
+  <section class="audience-section">
+    <div class="audience-card">
+      <h2>For Clients</h2>
+      <p>Looking for AI strategy consulting? These posts demonstrate my approach to solving real business problems with AI.</p>
+      <ul>
+        <li><a href="/blog/2025-02-12-sentinel-objects/">Beyond None: Mastering Sentinel Objects for Cleaner Python Code</a> — Clean code practices that scale</li>
+        <li><a href="/blog/2025-02-20-local-git-server/">Why I had to build a Local Git Server</a> — Pragmatic problem-solving under constraints</li>
+      </ul>
+      <p><a href="/contact" class="cta-link">Interested in working together? Get in touch →</a></p>
+    </div>
+
+    <div class="audience-card">
+      <h2>For Employers</h2>
+      <p>Assess my technical depth and professional experience.</p>
+      <ul>
+        <li><a href="/cv">View my CV →</a></li>
+        <li><a href="/blog/2025-02-12-sentinel-objects/">Technical deep-dive: Sentinel Objects</a></li>
+        <li><a href="/blog/2025-02-20-local-git-server/">Technical deep-dive: Local Git Server</a></li>
+      </ul>
+    </div>
+
+    <div class="audience-card">
+      <h2>For Peers</h2>
+      <p>Technical content for data scientists and engineers who love to learn.</p>
+      <ul>
+        <li><a href="/blog/2025-02-12-sentinel-objects/">Sentinel Objects in Python</a></li>
+        <li><a href="/blog/2025-02-20-local-git-server/">Building a Local Git Server</a></li>
+        <li><a href="https://github.com/sambaths" target="_blank" rel="noopener noreferrer">GitHub →</a></li>
+      </ul>
+    </div>
+  </section>
+</SimpleLayout>
+
+<style>
+  .audience-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .audience-card {
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+  }
+
+  .audience-card h2 {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .audience-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .audience-card ul {
+    margin-bottom: 1rem;
+  }
+
+  .audience-card li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+</style>
