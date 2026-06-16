@@ -3,7 +3,7 @@
 ## Identity & Positioning
 
 - **Sambath S** — AI Strategy Consultant, Senior Data Scientist, Freelance Data Scientist/ML Engineer
-- **Positioning**: "AI Strategy Consultant who architects the vision and builds the code" — a strategist who codes
+- **Positioning**: "AI Strategy Consultant — I build AI systems that solve real problems" — a strategist who codes
 - **Audience** (C > A ≈ B):
   - **C (Reputation/Peers)**: Primary. Deep technical content, blog posts, open-source work build long-term authority
   - **A (Clients)**: Secondary. Consulting signals — case studies, services demonstrated through writing
