@@ -37,6 +37,14 @@ const shareUrl = encodeURIComponent(postUrl);
   publishedTime={date.toISOString()}
   tags={tags}
 >
+  <nav class="container blog-post__breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb__sep">/</span>
+    <a href="/blog">Blog</a>
+    <span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">{title}</span>
+  </nav>
+
   <article class="container blog-post">
     <header class="blog-post__header">
       <p class="blog-post__date">{date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} · {readingTime(post.body)} min read</p>
@@ -110,6 +118,34 @@ const shareUrl = encodeURIComponent(postUrl);
 </BaseLayout>
 
 <style>
+  .blog-post__breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .blog-post__breadcrumb a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .blog-post__breadcrumb a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .breadcrumb__sep {
+    color: var(--color-border);
+  }
+
+  .breadcrumb__current {
+    color: var(--color-text);
+  }
+
   .blog-post__header {
     margin-bottom: 2rem;
     text-align: center;
