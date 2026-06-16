@@ -11,7 +11,7 @@ const sortedPosts = allPosts.sort(
 const allTags = [...new Set(sortedPosts.flatMap(p => p.data.tags || []))].sort();
 ---
 
-<BaseLayout title="Blog" description="Articles on AI strategy, data science, and software engineering by Sambath S." url="/blog">
+<BaseLayout title="Blog" description="Articles on data science, ML engineering, and building things that work — by Sambath S." url="/blog">
   <div class="container blog-archive">
     <h1 class="blog-archive__heading">Blog</h1>
     <p class="blog-archive__subtitle">Thoughts on AI strategy, data science, and building things that matter.</p>

@@ -8,8 +8,8 @@ export async function GET(context: { site: string }) {
   );
 
   return rss({
-    title: 'Sambath S — AI Strategy Consultant',
-    description: 'Articles on AI strategy, data science, and software engineering.',
+    title: 'Sambath S',
+    description: 'Articles on data science, ML engineering, and building things that work.',
     site: context.site,
     items: sortedPosts.map(post => ({
       title: post.data.title,

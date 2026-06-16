@@ -11,7 +11,7 @@ export interface Props {
 
 const { title, description, image, url, type = 'website', publishedTime, tags } = Astro.props;
 
-const siteTitle = 'Sambath S — AI Strategy Consultant';
+const siteTitle = 'Sambath S';
 const fullTitle = title === siteTitle ? siteTitle : `${title} | Sambath S`;
 const siteUrl = 'https://sambaths.com';
 const canonicalUrl = url ? new URL(url, siteUrl).href : siteUrl;
