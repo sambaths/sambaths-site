@@ -13,7 +13,3 @@ npm run build
 - Astro 5, TypeScript, MDX
 - CSS custom properties with dark/light theme
 - Inter + JetBrains Mono
-
-## Routes
-
-`/` `/blog` `/blog/[slug]` `/blog/tags/[tag]` `/start-here` `/cv` `/contact` `/feed.xml`
