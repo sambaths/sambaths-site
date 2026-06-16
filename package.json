@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "sync-issues": "node scripts/sync-issues.mjs"
+    "sync-issues": "node scripts/sync-issues.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",
@@ -15,5 +16,8 @@
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/vercel": "^9.0.5",
     "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }
