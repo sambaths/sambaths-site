@@ -5,7 +5,9 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: { enabled: true },
+  }),
   site: 'https://sambaths.com',
   integrations: [mdx(), sitemap()],
 });
