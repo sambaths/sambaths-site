@@ -9,9 +9,13 @@ local/
 node_modules
 package-lock.json
 
-# Agent scratch files (planning, PRDs, content drafts)
+# Agent files (planning, config, voice, context)
 .scratch/
+.opencode/
 docs/
+AGENTS.md
+CONTEXT.md
+.voice.md
 ralph/
 
 # Astro build output
@@ -24,3 +28,5 @@ dist/
 
 # macOS
 .DS_Store
+
+src/content/drafts
