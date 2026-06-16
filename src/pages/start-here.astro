@@ -2,77 +2,67 @@
 import SimpleLayout from '../layouts/SimpleLayout.astro';
 ---
 
-<SimpleLayout title="Start Here" description="The best of my writing, organized by who you are — client, employer, or fellow engineer." url="/start-here">
-  <section class="audience-section">
-    <div class="audience-card">
-      <h2>For Clients</h2>
-      <p>Hiring a consultant is a leap of faith. These posts show how I think about solving real problems with AI.</p>
-      <ul>
-        <li><a href="/blog/2025-02-12-sentinel-objects/">Beyond None: Mastering Sentinel Objects for Cleaner Python Code</a> — Clean code practices that scale</li>
-        <li><a href="/blog/2025-02-20-local-git-server/">Why I had to build a Local Git Server</a> — Pragmatic problem-solving under constraints</li>
-      </ul>
-      <p><a href="/contact" class="cta-link">Interested in working together? Get in touch →</a></p>
-    </div>
+<SimpleLayout title="Start Here" description="The best of my writing and work — curated so you can jump straight in." url="/start-here">
+  <section class="link-list">
+    <p class="link-list__intro">
+      Hi, I'm Sambath. Here's the best of what I've written and built — no categories, just the good stuff.
+    </p>
 
-    <div class="audience-card">
-      <h2>For Employers</h2>
-      <p>Want to know if I can actually do the work? Here's proof.</p>
-      <ul>
-        <li><a href="/cv">View my CV →</a></li>
-        <li><a href="/blog/2025-02-12-sentinel-objects/">Technical deep-dive: Sentinel Objects</a></li>
-        <li><a href="/blog/2025-02-20-local-git-server/">Technical deep-dive: Local Git Server</a></li>
-      </ul>
-    </div>
-
-    <div class="audience-card">
-      <h2>For Peers</h2>
-      <p>For data scientists and engineers who never stop learning. Neither do I.</p>
-      <ul>
-        <li><a href="/blog/2025-02-12-sentinel-objects/">Sentinel Objects in Python</a></li>
-        <li><a href="/blog/2025-02-20-local-git-server/">Building a Local Git Server</a></li>
-        <li><a href="https://github.com/sambaths" target="_blank" rel="noopener noreferrer">GitHub →</a></li>
-      </ul>
-    </div>
+    <ul>
+      <li>
+        <a href="/blog/2025-02-12-sentinel-objects/">Beyond None: Mastering Sentinel Objects for Cleaner Python Code</a>
+        — Clean code practices that scale
+      </li>
+      <li>
+        <a href="/blog/2025-02-20-local-git-server/">Why I had to build a Local Git Server</a>
+        — Pragmatic problem-solving under constraints
+      </li>
+      <li>
+        <a href="/cv">View my CV</a>
+        — Experience and skills
+      </li>
+      <li>
+        <a href="https://github.com/sambaths" target="_blank" rel="noopener noreferrer">GitHub</a>
+        — Open source and side projects
+      </li>
+      <li>
+        <a href="/contact">Get in touch</a>
+        — Let's work together
+      </li>
+    </ul>
   </section>
 </SimpleLayout>
 
 <style>
-  .audience-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  .link-list {
+    max-width: 36rem;
   }
 
-  .audience-card {
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-  }
-
-  .audience-card h2 {
-    font-size: 1.25rem;
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-  }
-
-  .audience-card p {
-    font-size: 0.95rem;
+  .link-list__intro {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
     color: var(--color-text-muted);
-    margin-bottom: 1rem;
   }
 
-  .audience-card ul {
-    margin-bottom: 1rem;
+  .link-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
-  .audience-card li {
-    margin-bottom: 0.5rem;
+  .link-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
     font-size: 0.95rem;
+    line-height: 1.5;
   }
 
-  .cta-link {
-    display: inline-block;
+  .link-list li:last-child {
+    border-bottom: none;
+  }
+
+  .link-list a {
     font-weight: 600;
-    font-size: 0.95rem;
   }
 </style>
