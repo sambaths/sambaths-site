@@ -1,0 +1,83 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { readingTime } from '../lib/reading-time';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+  showTags?: boolean;
+}
+
+const { post, showTags = true } = Astro.props;
+const { title, date, description, tags } = post.data;
+const minutes = readingTime(post.body);
+---
+
+<article class="post-card">
+  <a href={`/blog/${post.slug}/`} class="post-card__link">
+    <h2 class="post-card__title">{title}</h2>
+    <p class="post-card__meta">
+      {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      {' · '}
+      {minutes} min read
+    </p>
+    {description && <p class="post-card__excerpt">{description}</p>}
+    {showTags && tags && tags.length > 0 && (
+      <div class="post-card__tags">
+        {tags.map(tag => <span class="tag">{tag}</span>)}
+      </div>
+    )}
+  </a>
+</article>
+
+<style>
+  .post-card {
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .post-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .post-card__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-card__title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .post-card__meta {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .post-card__excerpt {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-card__tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background: var(--color-card-bg);
+    color: var(--color-accent);
+    border-radius: 0.25rem;
+  }
+</style>

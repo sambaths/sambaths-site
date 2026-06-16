@@ -10,6 +10,8 @@
     "typecheck": "tsc --noEmit",
     "new-post": "node scripts/new-post.mjs",
     "sync-issues": "node scripts/sync-issues.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "husky"
   },
   "dependencies": {
@@ -17,9 +19,12 @@
     "@astrojs/rss": "^4.0.0",
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/vercel": "^9.0.5",
-    "astro": "^5.0.0"
+    "astro": "^5.0.0",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "husky": "^9.1.7"
+    "@astrojs/check": "^0.9.9",
+    "husky": "^9.1.7",
+    "vitest": "^4.1.9"
   }
 }

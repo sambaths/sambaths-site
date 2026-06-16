@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -24,21 +25,7 @@ const filteredPosts = allPosts
     <p class="blog-archive__subtitle"><a href="/blog">← Back to all posts</a></p>
 
     <div class="blog-archive__list">
-      {
-        filteredPosts.map(post => (
-          <article class="post-card">
-            <a href={`/blog/${post.slug}/`} class="post-card__link">
-              <h2 class="post-card__title">{post.data.title}</h2>
-              <p class="post-card__meta">
-                {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                {' · '}
-                {Math.ceil(post.body.split(/\s+/).length / 160)} min read
-              </p>
-              {post.data.description && <p class="post-card__excerpt">{post.data.description}</p>}
-            </a>
-          </article>
-        ))
-      }
+      {filteredPosts.map(post => <PostCard post={post} showTags={false} />)}
     </div>
   </div>
 </BaseLayout>
