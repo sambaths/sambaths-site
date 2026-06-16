@@ -104,25 +104,26 @@ Focus:   ML, Agentic AI, Statistics
 </section>
 
 <script>
+  import { cycleTheme, applyTheme, initTheme } from '../lib/theme';
+
   (function() {
     var root = document.getElementById('proto-b-root');
     var canvas = document.getElementById('proto-b-canvas');
     var themeBtn = document.getElementById('proto-b-theme');
     var themeLabel = document.getElementById('proto-b-theme-label');
-    var themes = ['dark', 'light', 'contrast'];
     var themeIcons = { dark: '☾ ', light: '☀ ', contrast: '◐ ' };
 
     function updateThemeUI(theme) {
       if (themeLabel) themeLabel.textContent = 'theme: ' + (themeIcons[theme] || '') + theme;
     }
 
+    initTheme();
+
     if (themeBtn) {
       themeBtn.addEventListener('click', function() {
         var current = document.documentElement.getAttribute('data-theme') || 'dark';
-        var idx = themes.indexOf(current);
-        var next = themes[(idx + 1) % themes.length];
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+        var next = cycleTheme(current);
+        applyTheme(next);
         updateThemeUI(next);
       });
 
