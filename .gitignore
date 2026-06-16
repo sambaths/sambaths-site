@@ -11,11 +11,16 @@ package-lock.json
 
 # Agent scratch files (planning, PRDs, content drafts)
 .scratch/
+docs/
+ralph/
 
 # Astro build output
 dist/
 .astro/
 .netlify/
 
-# Archive of old Jekyll template
-_archive/vendor/
+# Deployment artifacts
+.vercel/
+
+# macOS
+.DS_Store
