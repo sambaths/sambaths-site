@@ -18,13 +18,12 @@ export const POST: APIRoute = async ({ request }) => {
     const { error: sendError } = await resend.emails.send({
       from: 'Sambath S <hello@sambaths.com>',
       to: email,
-      subject: 'My CV — Sambath S',
+      subject: 'Sambath S - CV',
       html: `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 24px; color: #1a1a2e;">
   <p style="font-size: 18px; margin: 0 0 24px;">Thanks for your interest.</p>
   <a href="https://drive.google.com/file/d/1nwKAXXvFtrhw5kdEm1AGB4rJV5Nfv6U5/view?usp=sharing" style="display: inline-block; padding: 12px 24px; background: #a78bfa; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">Download CV</a>
   <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 32px 0 16px;" />
   <p style="margin: 0 0 4px; font-weight: 600;">Sambath S</p>
-  <p style="margin: 0; color: #6b7280; font-size: 13px;">AI Strategy Consultant</p>
 </div>`,
     });
 
