@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  output: 'static',
+  output: 'server',
   adapter: vercel(),
   site: 'https://sambaths.com',
   integrations: [mdx(), sitemap()],
