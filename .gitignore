@@ -5,9 +5,8 @@ _site/
 # Ignore the directory for local files during development
 local/
 
-# Ingore files created by npm
+# Ignore files created by npm
 node_modules
-package-lock.json
 
 # Agent files (planning, config, voice, context)
 .scratch/
