@@ -66,6 +66,14 @@ Focus:   ML, Agentic AI, Statistics
           <span class="proto-b__contact-line"><span class="proto-b__contact-key">x</span>       <a href="https://x.com/sambath__s" target="_blank">@sambath__s</a></span>
         </div>
       </div>
+
+      <div class="proto-b__card">
+        <p class="proto-b__prompt">
+          <span class="proto-b__prompt-symbol">❯</span>
+          <span class="proto-b__cmd-text">./subscribe</span>
+        </p>
+        <script is:inline async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="01ac2b16-b9eb-4411-a482-2430e8a4a8de"></script>
+      </div>
     </aside>
 
     <main class="proto-b__main">
@@ -98,7 +106,13 @@ Focus:   ML, Agentic AI, Statistics
       <hr class="proto-b__hr" />
 
       <div class="proto-b__cta">
-        <a href="/cv.pdf" class="proto-b__btn proto-b__btn--primary" download>./download-cv</a>
+        <form class="proto-b__cv-form" id="cv-form">
+          <span class="proto-b__prompt-symbol">❯</span>
+          <span class="proto-b__cmd-text">request-cv </span>
+          <input type="email" id="cv-email" placeholder="your@email.com" required class="proto-b__cv-input" />
+          <button type="submit" class="proto-b__btn proto-b__btn--primary">./send</button>
+        </form>
+        <p class="proto-b__cv-success" id="cv-success" hidden>✓ Link sent — check your inbox</p>
       </div>
     </main>
   </div>
@@ -128,6 +142,31 @@ Focus:   ML, Agentic AI, Statistics
 
       var initial = document.documentElement.getAttribute('data-theme') || 'dark';
       updateThemeUI(initial);
+    }
+
+    var cvForm = document.getElementById('cv-form');
+    var cvSuccess = document.getElementById('cv-success');
+    if (cvForm) {
+      cvForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var email = document.getElementById('cv-email').value;
+        var btn = cvForm.querySelector('button');
+        btn.textContent = './sending';
+        btn.disabled = true;
+        try {
+          var res = await fetch('/api/request-cv', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+          if (!res.ok) throw new Error();
+          cvForm.style.display = 'none';
+          cvSuccess.hidden = false;
+        } catch {
+          btn.textContent = './send';
+          btn.disabled = false;
+        }
+      });
     }
   })();
 </script>
@@ -464,8 +503,45 @@ Focus:   ML, Agentic AI, Statistics
 
   .proto-b__cta {
     display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .proto-b__cv-form {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: nowrap;
+  }
+
+  .proto-b__cv-input {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0;
+    outline: none;
+    flex: 1;
+    min-width: 0;
+    caret-color: var(--color-accent);
+  }
+
+  .proto-b__cv-input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+  }
+
+  .proto-b__cv-form .proto-b__btn {
+    margin-left: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .proto-b__cv-success {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    margin: 0;
   }
 
   .proto-b__btn {

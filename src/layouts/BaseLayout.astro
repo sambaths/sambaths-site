@@ -39,9 +39,7 @@ const currentPath = Astro.url.pathname;
         <nav class="masthead__nav" aria-label="Main navigation">
           <a href="/" class={currentPath === '/' ? 'nav-link nav-link--active' : 'nav-link'}>Home</a>
           <a href="/blog" class={currentPath.startsWith('/blog') ? 'nav-link nav-link--active' : 'nav-link'}>Blog</a>
-          <a href="/start-here" class={currentPath === '/start-here' ? 'nav-link nav-link--active' : 'nav-link'}>Start Here</a>
-          <a href="/cv" class={currentPath === '/cv' ? 'nav-link nav-link--active' : 'nav-link'}>CV</a>
-          <a href="/contact" class={currentPath === '/contact' ? 'nav-link nav-link--active' : 'nav-link'}>Contact</a>
+
         </nav>
         <ThemeToggle />
       </div>
@@ -81,13 +79,13 @@ const currentPath = Astro.url.pathname;
     display: none;
   }
 
-  .footer {
-    display: none;
-  }
-
   main {
     padding: 0 !important;
     min-height: 100vh !important;
+  }
+
+  .footer {
+    display: none;
   }
 
   .masthead__inner {

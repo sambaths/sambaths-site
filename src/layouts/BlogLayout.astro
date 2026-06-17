@@ -2,19 +2,19 @@
 import BaseLayout from './BaseLayout.astro';
 import { readingTime } from '../lib/reading-time';
 import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export interface Props {
   post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 const { title, date, description, image, tags } = post.data;
 
 const allPosts = await getCollection('blog');
 const relatedPosts = allPosts
-  .filter(p => p.slug !== post.slug)
+  .filter(p => p.id !== post.id)
   .map(p => ({
     post: p,
     overlap: tags ? tags.filter(t => p.data.tags?.includes(t)).length : 0,
@@ -23,7 +23,7 @@ const relatedPosts = allPosts
   .sort((a, b) => b.overlap - a.overlap || b.post.data.date.valueOf() - a.post.data.date.valueOf())
   .slice(0, 3);
 
-const postUrl = `${Astro.url.origin}/blog/${post.slug}/`;
+const postUrl = `${Astro.url.origin}/blog/${post.id}/`;
 const shareText = encodeURIComponent(title);
 const shareUrl = encodeURIComponent(postUrl);
 ---
@@ -32,7 +32,7 @@ const shareUrl = encodeURIComponent(postUrl);
   title={title}
   description={description || ''}
   image={image}
-  url={`/blog/${post.slug}/`}
+  url={`/blog/${post.id}/`}
   type="article"
   publishedTime={date.toISOString()}
   tags={tags}
@@ -86,7 +86,7 @@ const shareUrl = encodeURIComponent(postUrl);
         <h2 class="blog-post__related-title">Related Posts</h2>
         <div class="blog-post__related-grid">
           {relatedPosts.map(({ post: related }) => (
-            <a href={`/blog/${related.slug}/`} class="related-card">
+            <a href={`/blog/${related.id}/`} class="related-card">
               <h3 class="related-card__title">{related.data.title}</h3>
               <p class="related-card__meta">
                 {related.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}

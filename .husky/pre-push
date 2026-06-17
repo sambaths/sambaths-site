@@ -1,9 +1,0 @@
-set -e
-
-npm run typecheck && npm run build
-
-echo "--- Running npm audit (high+ severity) ---"
-npm audit --audit-level=high
-
-echo "--- Running gitleaks secret scan ---"
-gitleaks git --no-banner

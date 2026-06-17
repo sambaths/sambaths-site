@@ -13,7 +13,7 @@ const minutes = readingTime(post.body);
 ---
 
 <article class="post-card">
-  <a href={`/blog/${post.slug}/`} class="post-card__link">
+  <a href={`/blog/${post.id}/`} class="post-card__link">
     <h2 class="post-card__title">{title}</h2>
     <p class="post-card__meta">
       {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
