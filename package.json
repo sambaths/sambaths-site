@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Sambath S — AI Strategy Consultant",
   "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
