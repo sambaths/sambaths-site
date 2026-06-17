@@ -165,6 +165,8 @@ Focus:   ML, Agentic AI, Statistics
         } catch {
           btn.textContent = './send';
           btn.disabled = false;
+          btn.textContent = '× error';
+          setTimeout(function() { btn.textContent = './send'; }, 3000);
         }
       });
     }
