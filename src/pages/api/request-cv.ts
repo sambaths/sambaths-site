@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const { error: sendError } = await resend.emails.send({
-      from: 'Sambath S <onboarding@resend.dev>',
+      from: 'Sambath S <hello@sambaths.com>',
       to: email,
       subject: 'My CV — Sambath S',
       html: `<p>Thanks for your interest.</p><p>Here's the link to my CV: <a href="https://drive.google.com/file/d/1nwKAXXvFtrhw5kdEm1AGB4rJV5Nfv6U5/view?usp=sharing">Download CV</a></p><p>— Sambath</p>`,
