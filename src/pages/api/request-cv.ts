@@ -15,12 +15,19 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    await resend.emails.send({
+    const { error: sendError } = await resend.emails.send({
       from: 'Sambath S <onboarding@resend.dev>',
       to: email,
       subject: 'My CV — Sambath S',
       html: `<p>Thanks for your interest.</p><p>Here's the link to my CV: <a href="https://drive.google.com/file/d/1nwKAXXvFtrhw5kdEm1AGB4rJV5Nfv6U5/view?usp=sharing">Download CV</a></p><p>— Sambath</p>`,
     });
+
+    if (sendError) {
+      return new Response(JSON.stringify({ error: String(sendError) }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
