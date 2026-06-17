@@ -5,7 +5,7 @@ export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const resend = new Resend(import.meta.env.RESEND_API_KEY);
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const { email } = await request.json();
 
     if (!email || typeof email !== 'string') {
@@ -27,7 +27,7 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'Failed to send' }), {
+    return new Response(JSON.stringify({ error: String(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
