@@ -1,5 +1,4 @@
 ---
-import ParticleCanvas from './ParticleCanvas.astro';
 import PostCard from './PostCard.astro';
 import { getCollection } from 'astro:content';
 
@@ -10,8 +9,6 @@ const latestPosts = allPosts
 ---
 
 <section class="proto-b" id="proto-b-root">
-  <ParticleCanvas />
-
   <div class="container proto-b__inner">
     <aside class="proto-b__sidebar" aria-label="Quick info">
       <div class="proto-b__card proto-b__nav-card">
@@ -69,8 +66,6 @@ Focus:   ML, Agentic AI, Statistics
 
     </aside>
 
-    <script is:inline async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="01ac2b16-b9eb-4411-a482-2430e8a4a8de"></script>
-
     <main class="proto-b__main">
       <p class="proto-b__big-prompt">
         <span class="proto-b__prompt-symbol">❯</span>
@@ -101,7 +96,7 @@ Focus:   ML, Agentic AI, Statistics
         <form class="proto-b__cv-form" id="cv-form">
           <span class="proto-b__prompt-symbol">❯</span>
           <span class="proto-b__cmd-text">request-cv </span>
-          <input type="email" id="cv-email" placeholder="your@email.com" required class="proto-b__cv-input" />
+          <input type="email" id="cv-email" placeholder="your@email.com" required class="proto-b__cv-input" aria-label="Email address for CV link" />
           <button type="submit" class="proto-b__btn proto-b__btn--primary">./send</button>
         </form>
         <p class="proto-b__cv-success" id="cv-success" hidden>✓ Link sent — check your inbox</p>
@@ -111,58 +106,54 @@ Focus:   ML, Agentic AI, Statistics
 </section>
 
 <script>
-  import { cycleTheme, applyTheme, initTheme } from '../lib/theme';
+  import { cycleTheme, applyTheme } from '../lib/theme';
 
-  (function() {
-    var themeBtn = document.getElementById('proto-b-theme');
-    var themeLabel = document.getElementById('proto-b-theme-label');
-    var themeIcons = { dark: '☾ ', light: '☀ ', contrast: '◐ ' };
+  const themeBtn = document.getElementById('proto-b-theme');
+  const themeLabel = document.getElementById('proto-b-theme-label');
+  const themeIcons = { dark: '☾ ', light: '☀ ', contrast: '◐ ' };
 
-    function updateThemeUI(theme) {
-      if (themeLabel) themeLabel.textContent = 'theme: ' + (themeIcons[theme] || '') + theme;
-    }
+  const updateThemeUI = (theme) => {
+    if (themeLabel) themeLabel.textContent = 'theme: ' + (themeIcons[theme] || '') + theme;
+  };
 
-    initTheme();
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = cycleTheme(current);
+      applyTheme(next);
+      updateThemeUI(next);
+    });
 
-    if (themeBtn) {
-      themeBtn.addEventListener('click', function() {
-        var current = document.documentElement.getAttribute('data-theme') || 'dark';
-        var next = cycleTheme(current);
-        applyTheme(next);
-        updateThemeUI(next);
-      });
+    const initial = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateThemeUI(initial);
+  }
 
-      var initial = document.documentElement.getAttribute('data-theme') || 'dark';
-      updateThemeUI(initial);
-    }
-
-    var cvForm = document.getElementById('cv-form');
-    var cvSuccess = document.getElementById('cv-success');
-    if (cvForm) {
-      cvForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        var email = document.getElementById('cv-email').value;
-        var btn = cvForm.querySelector('button');
-        btn.textContent = './sending';
-        btn.disabled = true;
-        try {
-          var res = await fetch('/api/request-cv', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }),
-          });
-          if (!res.ok) throw new Error();
-          cvForm.style.display = 'none';
-          cvSuccess.hidden = false;
-        } catch {
-          btn.textContent = './send';
-          btn.disabled = false;
-          btn.textContent = '× error';
-          setTimeout(function() { btn.textContent = './send'; }, 3000);
-        }
-      });
-    }
-  })();
+  const cvForm = document.getElementById('cv-form');
+  const cvSuccess = document.getElementById('cv-success');
+  if (cvForm) {
+    cvForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('cv-email').value;
+      const btn = cvForm.querySelector('button');
+      btn.textContent = './sending';
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/request-cv', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        if (!res.ok) throw new Error();
+        cvForm.style.display = 'none';
+        cvSuccess.hidden = false;
+      } catch {
+        btn.textContent = './send';
+        btn.disabled = false;
+        btn.textContent = '× error';
+        setTimeout(() => { btn.textContent = './send'; }, 3000);
+      }
+    });
+  }
 </script>
 
 <style>
